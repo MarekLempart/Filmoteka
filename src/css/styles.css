@@ -1,4 +1,33 @@
+/* styles.css */
+
 body {
   font-family: 'Montserrat', sans-serif;
   font-size: 16px;
+}
+
+.movies-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+
+@media (min-width: 768px) {
+  .movies-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .movies-container {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.movie-card {
+  text-align: center;
+}
+
+.movie-image {
+  width: 100%;
+  cursor: pointer;
 }

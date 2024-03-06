@@ -1,1 +1,0 @@
-{"mappings":"AAAA,IAAMA,YAAcC,SAASC,cAAc","sources":["src/js/index.js"],"sourcesContent":["const mainContent = document.querySelector('#main-content');\n"],"names":["mainContent","document","querySelector"],"version":3,"file":"index.e9b112f7.js.map"}

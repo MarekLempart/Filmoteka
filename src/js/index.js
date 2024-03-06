@@ -1,6 +1,6 @@
 // index.js
 
-import axios from 'axios'; // Dodaj ten import na początku pliku index.js
+import axios from 'axios';
 import { getMoviesByKeyword } from './api.js';
 import { renderMovies } from './renderFilms.js';
 
@@ -8,9 +8,9 @@ const genreInput = document.getElementById('genre-input');
 const searchButton = document.getElementById('search-button');
 
 searchButton.addEventListener('click', async () => {
-  const genre = genreInput.value; // Pobieramy gatunek z pola input
+  const genre = genreInput.value; // Pobieramy value z pola input
   console.log('Searching for movies with genre:', genre);
-  const movies = await getMoviesByKeyword(genre); // Korzystamy z funkcji getMoviesByKeyword
+  const movies = await getMoviesByKeyword(genre);
   console.log('Movies:', movies);
   renderMovies(movies);
 });

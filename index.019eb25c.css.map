@@ -1,0 +1,1 @@
+{"mappings":"ACAA","sources":["index.019eb25c.css","src/css/styles.css"],"sourcesContent":["body {\n  font-family: Montserrat, sans-serif;\n  font-size: 16px;\n}\n\n/*# sourceMappingURL=index.019eb25c.css.map */\n","body {\n  font-family: 'Montserrat', sans-serif;\n  font-size: 16px;\n}\n"],"names":[],"version":3,"file":"index.019eb25c.css.map"}

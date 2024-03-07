@@ -1,8 +1,13 @@
 // index.js
 
 import axios from 'axios';
-import { getMoviesByKeyword } from './api.js';
+import { getMoviesByKeyword } from './api--ML.js';
 import { renderMovies } from './renderFilms.js';
+
+import renderGallery from './gallery.js'; // Importujemy funkcję renderGallery z pliku gallery.js
+
+// Wywołujemy funkcję renderGallery po załadowaniu strony
+window.addEventListener('DOMContentLoaded', renderGallery);
 
 const genreInput = document.getElementById('genre-input');
 const searchButton = document.getElementById('search-button');

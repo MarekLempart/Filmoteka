@@ -7,7 +7,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const searchForm = document.getElementById('search-form');
   const searchInput = document.querySelector('.search-form input');
   const notResult = document.getElementById('not-result');
-  const searchQuery = searchInput.value.trim().toLowerCase().split(' ').join('+');
+  const searchQuery = searchInput.value
+    .trim()
+    .toLowerCase()
+    .split(' ')
+    .join('+');
 
   searchForm.addEventListener('submit', async event => {
     event.preventDefault();
@@ -49,11 +53,13 @@ document.addEventListener('DOMContentLoaded', () => {
               // Utworzenie elementu karty filmu
               const movieCard = `
                 <div class="movie-card" data-movie-id="${movie.id}">
-                  <img class="movie-poster" src="${posterPath}" alt="${movie.title}">
+                  <img class="movie-poster" src="${posterPath}" alt="${
+                movie.title
+              }">
                   <div class="movie-details">
                     <p class="movie-title">${movie.title}</p>
                     <p class="movie-info">${getGenres(
-                      movie.genre_ids,
+                      movie.genre_ids
                     )} | ${movie.release_date.slice(0, 4)}</p>
                   </div>
                 </div>
@@ -61,33 +67,6 @@ document.addEventListener('DOMContentLoaded', () => {
               return movieCard;
             })
             .join('');
-
-          //   // Wyświetlenie filmów
-          //   galleryContainer.innerHTML = searchResults
-          //     .map(movie => {
-          //       // Sprawdź czy plakat istnieje
-          //       const posterPath = movie.poster_path
-          //         ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
-          //         : 'plakat_zastepczy.jpg';
-
-          //       // Utworzenie elementu karty filmu
-          //       const movieCard = `
-          //   <div class="movie-card" data-movie-id="${movie.id}">
-          //     <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="${
-          //         movie.title
-          //       }" class="movie-poster">
-          //     <div class="movie-details">
-          //       <p class="movie-title">${movie.title}</p>
-          //       <p class="movie-info">${getGenres(movie.genre_ids)} | ${movie.release_date.slice(
-          //         0,
-          //         4,
-          //       )}</p>
-          //     </div>
-          //   </div>
-          // `;
-          //       return movieCard;
-          //     })
-          //     .join('');
 
           // Obsługa zdarzenia kliknięcia dla każdej karty filmu
           const movieCards = document.querySelectorAll('.movie-card');
@@ -106,6 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
         console.error('Error fetching search movies:', error);
       }
     }
+    searchInput.value = '';
   });
 });
 
@@ -131,43 +111,3 @@ const clearGallery = () => {
   const galleryContainer = document.getElementById('gallery-container');
   galleryContainer.innerHTML = ''; // Wyczyszczenie zawartości galerii
 };
-
-// // W pliku search.js
-// galleryContainer.innerHTML = searchResults
-//   .map(movie => {
-//     // Sprawdzenie czy plakat istnieje
-//     const posterPath = movie.poster_path ? `https://image.tmdb.org/t/p/w500${movie.poster_path}` : './img/kolaz-w-tle-filmu.png';
-
-//     // Utworzenie elementu karty filmu
-//     const movieCard = `
-//       <div class="movie-card" data-movie-id="${movie.id}">
-//         <div class="movie-poster" style="background-image: url('${posterPath}');"></div>
-//         <div class="movie-details">
-//           <p class="movie-title">${movie.title}</p>
-//           <p class="movie-info">${getGenres(movie.genre_ids)} | ${movie.release_date.slice(0, 4)}</p>
-//         </div>
-//       </div>
-//     `;
-//     return movieCard;
-//   })
-//   .join('');
-
-// // W pliku gallery.js
-// galleryContainer.innerHTML = movies
-//   .map(movie => {
-//     // Sprawdzenie czy plakat istnieje
-//     const posterPath = movie.poster_path ? `https://image.tmdb.org/t/p/w500${movie.poster_path}` : './img/kolaz-w-tle-filmu.png';
-
-//     // Utworzenie elementu karty filmu
-//     const movieCard = `
-//       <div class="movie-card" data-movie-id="${movie.id}">
-//         <div class="movie-poster" style="background-image: url('${posterPath}');"></div>
-//         <div class="movie-details">
-//           <p class="movie-title">${movie.title}</p>
-//           <p class="movie-info">${getGenres(movie.genre_ids)} | ${movie.release_date.slice(0, 4)}</p>
-//         </div>
-//       </div>
-//     `;
-//     return movieCard;
-//   })
-//   .join('');

@@ -2,7 +2,7 @@
 import './sass/main.scss';
 //JS Global
 import './js/api';
-import './js/search';
+// import './js/search';
 // import './js/search-ML';
 // import './js/search-v02';
 import './js/gallery';

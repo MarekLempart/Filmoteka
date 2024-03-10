@@ -3,8 +3,8 @@ import {
   fetchSearchMovies,
   fetchTrendingMovies,
   genresName,
-} from './api';
-import { addToQueue, addToWatchedMovies } from './localstorage';
+} from '../js/api';
+import { addToQueue, addToWatchedMovies } from '../js/localstorage';
 
 document.addEventListener('DOMContentLoaded', () => {
   renderGallery('', 1); // Wyświetlenie popularnych filmów na stronie przy starcie

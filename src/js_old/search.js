@@ -1,6 +1,6 @@
 // search.js
 
-import { fetchMovieDetails, fetchSearchMovies, genresName } from './api';
+import { fetchMovieDetails, fetchSearchMovies, genresName } from '../js/api';
 // import kolazTleFilmu from './kolaz-w-tle-filmu.png';
 
 document.addEventListener('DOMContentLoaded', () => {

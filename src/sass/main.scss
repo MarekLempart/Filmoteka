@@ -1,0 +1,11 @@
+/*
+ * Główny plik dla stylów.
+ * Wszystkie partials podłączamy tutaj.
+ */
+
+// Style dla pliku z przykładem HTML fragmentu
+@import '../css/header.css';
+@import '../css/search.css';
+@import '../css/movies.css';
+@import '../css/pagination.css';
+@import '../css/footer.css';

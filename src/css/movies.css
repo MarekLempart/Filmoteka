@@ -1,5 +1,24 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
 
+#scrollToTopButton {
+  font-size: 0.9em;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: none; /* Początkowo ukryj przycisk */
+  padding: 10px 10px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  z-index: 999; /* Upewnij się, że przycisk jest na wierzchu innych elementów */
+}
+
+#scrollToTopButton:hover {
+  background-color: #0056b3;
+}
+
 #gallery-container {
   display: grid;
   grid-template-columns: 1fr;

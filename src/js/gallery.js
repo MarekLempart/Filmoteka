@@ -153,3 +153,76 @@ scrollToTopButton.addEventListener('click', () => {
     behavior: 'smooth', // Działa w większości nowoczesnych przeglądarek, aby przewijać płynnie
   });
 });
+
+import { fetchMovieTrailers } from './api';
+import './modalTrailer'; // Importujemy funkcję otwierającą modal z zwiastunem
+
+//Aleksander Modal
+// const openModal = movieData => {
+//   const modal = document.getElementById('myModal');
+//   modal.style.display = 'block';
+
+const openModal = async movieData => {
+  // Zmiana na asynchroniczną funkcję
+  const modal = document.getElementById('myModal');
+  modal.style.display = 'block';
+
+  // Pobieranie zwiastunów filmu
+  const trailers = await fetchMovieTrailers(movieData.id);
+  const trailerKey = trailers.results[0]?.key; // Pobierz klucz z pierwszego zwiastunu (jeśli istnieje)
+
+  const modalContent = document.getElementById('modalContent');
+  modalContent.innerHTML = `
+  <div class="movie-details-container">
+    <img class="movie-poster" src="https://image.tmdb.org/t/p/w500${
+      movieData.poster_path
+    }" alt="${movieData.title} Photo">
+    <div class="movie-details">
+      <h2>${movieData.title}</h2>
+      <p>Vote / Votes <span>${movieData.vote_average} / ${
+    movieData.vote_count
+  }</span></p>
+      <p>Popularity <span>${movieData.popularity}</span></p>
+      <p>Orginal Title <span>${movieData.original_title}</span></p>
+      <p>Genre <span>${movieData.genres
+        .map(genre => genre.name)
+        .join(', ')}</span></p>
+      <p><strong>ABOUT</strong> ${movieData.overview}</p>
+    </div>
+  </div>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/${trailerKey}" frameborder="0" allowfullscreen></iframe> <!-- Dodanie zwiastunu do modalu -->
+  <button class="watchedButton">Add to Watched</button>
+  <button class="queuedButton">Add to Queue</button>
+  <button class="close">Close</button>
+`;
+
+  const watchedButton = document.getElementsByClassName('watchedButton')[0];
+  watchedButton.onclick = () => {
+    addToWatchedMovies(movieData);
+  };
+  const queuedButton = document.getElementsByClassName('queuedButton')[0];
+  queuedButton.onclick = () => {
+    addToQueue(movieData);
+  };
+
+  const trailerButton = document.getElementsByClassName('trailerButton')[0]; // Przypisanie przycisku "trailerButton"
+  trailerButton.onclick = openTrailerModal; // Dodanie obsługi kliknięcia na przycisku "trailerButton"
+
+  const span = document.getElementsByClassName('close')[0];
+  span.onclick = () => {
+    modal.style.display = 'none';
+  };
+
+  // Obsługa zdarzenia keydown
+  document.addEventListener('keydown', function (event) {
+    if (event.key === 'Escape') {
+      modal.style.display = 'none';
+    }
+  });
+
+  window.onclick = event => {
+    if (event.target == modal) {
+      modal.style.display = 'none';
+    }
+  };
+};

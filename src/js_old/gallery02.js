@@ -6,7 +6,7 @@ import {
   fetchTrendingMovies,
   genresName,
 } from './api';
-import { addToQueue, addToWatchedMovies } from './localstorage';
+import { addToQueue, addToWatchedMovies } from './localstorage.js';
 // import './modalTrailer'; // Importujemy funkcję otwierającą modal z zwiastunem
 import { openModalPlayer } from './modalTrailer.js';
 
@@ -25,7 +25,8 @@ export const getGenres = genreIds => {
 
 const displayWatchedMovies = () => {
   try {
-    const watchedMovies = JSON.parse(localStorage.getItem('watchedMovies')) || [];
+    const watchedMovies =
+      JSON.parse(localStorage.getItem('watchedMovies')) || [];
     const moviesWithGenres = watchedMovies.map(movie => {
       let categories = 'Without category';
       if (movie.genres && movie.genres.length > 0) {
@@ -102,7 +103,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   searchForm.addEventListener('submit', async event => {
     event.preventDefault();
-    const searchQuery = searchInput.value.trim().toLowerCase().split(' ').join('+');
+    const searchQuery = searchInput.value
+      .trim()
+      .toLowerCase()
+      .split(' ')
+      .join('+');
     if (searchQuery) {
       try {
         const response = await fetchSearchMovies(searchQuery, 1);
@@ -148,7 +153,9 @@ const renderGallery = (dataGallery, rating) => {
           // Inicjalizacja zmiennej przechowującej informacje o gatunkach filmu
           let categories = 'Without category';
           // Ustalenie roku wydania filmu
-          let releaseYear = movie.release_date ? movie.release_date.slice(0, 4) : 'Without date';
+          let releaseYear = movie.release_date
+            ? movie.release_date.slice(0, 4)
+            : 'Without date';
 
           // Sprawdzenie czy istnieje przynajmniej jeden gatunek filmu, jeśli tak, pobierz nazwy wszystkich gatunków
           if (movie.genres && movie.genres.length > 0) {
@@ -161,7 +168,9 @@ const renderGallery = (dataGallery, rating) => {
           }
           console.log('rating: ', rating);
           let rate = rating
-            ? ` <span class="movie-info-rating">${movie.vote_average.toFixed(1)}</span>`
+            ? ` <span class="movie-info-rating">${movie.vote_average.toFixed(
+                1
+              )}</span>`
             : ``;
 
           // Zbudowanie kodu HTML dla karty filmu
@@ -245,7 +254,9 @@ const openModal = movieData => {
   }</span></p>
       <p>Popularity <span>${movieData.popularity}</span></p>
       <p>Orginal Title <span>${movieData.original_title}</span></p>
-      <p>Genre <span>${movieData.genres.map(genre => genre.name).join(', ')}</span></p>
+      <p>Genre <span>${movieData.genres
+        .map(genre => genre.name)
+        .join(', ')}</span></p>
       <p><strong>ABOUT</strong> ${movieData.overview}</p>
     </div>
     <div>
@@ -347,7 +358,10 @@ scrollToTopButton.addEventListener('click', () => {
 // Funkcja do sprawdzania, czy element jest blisko dolnej krawędzi okna przeglądarki
 function isNearBottom(element, threshold) {
   const rect = element.getBoundingClientRect();
-  return rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) + threshold;
+  return (
+    rect.bottom <=
+    (window.innerHeight || document.documentElement.clientHeight) + threshold
+  );
 }
 
 // Event scroll na oknie przeglądarki

@@ -1,106 +1,158 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
-
-#scrollToTopButton {
-  font-size: 0.9em;
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  display: none; /* Początkowo ukryj przycisk */
-  padding: 10px 10px;
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  z-index: 999; /* Upewnij się, że przycisk jest na wierzchu innych elementów */
+/* sekcja z filmami */
+.movies {
+  background-color: var(--bg-color);
 }
 
-#scrollToTopButton:hover {
-  background-color: #0056b3;
-}
-
+/* kontener na galerię filmów */
 #gallery-container {
   display: grid;
   grid-template-columns: 1fr;
-  margin-top: 20px;
-  background-color: #fff;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-.movie-card {
-  justify-content: center;
-  width: 280px;
-  height: 440px;
-  margin-bottom: 20px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  background-color: var(--bg-color);
 }
 
-.movie-details {
-  margin-top: 10px;
-  font-family: 'Roboto', sans-serif;
-  font-weight: 500;
-  font-size: 12px;
-  line-height: 1, 3;
-  color: #000;
+/* karta filmu */
+.movie-card {
+  display: flex;
+  flex-direction: column;
 }
-.movie-title {
-  text-transform: uppercase;
+
+/* wskazana karta filmu */
+.movie-card:hover,
+.movie-card:focus {
+  cursor: pointer;
 }
-.movie-info {
-  font-family: 'Roboto', sans-serif;
-  color: #ff6b08;
-}
+
+/* plakat filmu */
 .movie-poster {
   width: 280px;
   height: 100%;
   border-radius: 5px;
   display: flex;
   justify-content: center;
-  padding-top: 20px;
+  transition: transform 0.3s ease;
 }
-@media (min-width: 768px) {
+
+/* wskazany plakat filmu */
+.movie-poster:focus,
+.movie-poster:hover {
+  transform: scale(1.03);
+  border: thick double #ff001b;
+  padding: 6px;
+}
+
+/* szczegóły filmu */
+.movie-details {
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.3;
+  color: var(--movieDetails-color);
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+/* tytuł filmu */
+.movie-title {
+  text-transform: uppercase;
+  --movieDetails-color: #000;
+}
+
+/* wskazany tytuł filmu */
+.movie-title:hover,
+.movie-title:focus {
+  transform: scale(1) translateX(1%);
+}
+
+/* pozostałe informacje filmie */
+.movie-info {
+  color: var(--details-contrast);
+}
+
+/* style dla tabletów i komputerów */
+@media screen and (min-width: 768px) {
   #gallery-container {
-    display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 32px;
-    padding-bottom: 32px;
-    margin-left: 32px;
+    padding-top: 59px;
   }
-
-  .movie-card {
-    justify-content: center;
-    width: 336px;
-    height: 494px;
-    margin-bottom: 32px;
-  }
-
-  .movie-details {
-    margin-top: 8px;
-  }
-
   .movie-poster {
     width: 336px;
     height: 100%;
     border-radius: 5px;
     display: flex;
     justify-content: center;
-    padding-top: 20px;
+  }
+  .movie-details {
+    margin-top: 8px;
+    margin-bottom: 32px;
   }
 }
-@media (min-width: 1280px) {
+
+@media screen and (min-width: 1280px) {
   #gallery-container {
-    display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
-  }
-  .movie-card {
-    width: 395px;
-    height: 634px;
+    padding-top: 60px;
+    max-width: 1280px;
   }
   .movie-poster {
     width: 395px;
+    height: 574px;
   }
   .movie-details {
     margin-top: 12px;
+    font-size: 20px;
+    line-height: 1.2;
+    width: 395px;
   }
+}
+
+/* dodatkowe style dla szerokich ekranów*/
+@media screen and (min-width: 1720px) {
+  #gallery-container.monitor-wide {
+    grid-template-columns: repeat(4, 1fr);
+    max-width: 1720px;
+  }
+}
+@media screen and (min-width: 2180px) {
+  #gallery-container.monitor-wide {
+    grid-template-columns: repeat(5, 1fr);
+    max-width: 2180px;
+  }
+}
+
+@media screen and (min-width: 2560px) {
+  #gallery-container.monitor-wide {
+    grid-template-columns: repeat(6, 1fr);
+    max-width: 2560px;
+  }
+}
+
+@media screen and (min-width: 3000px) {
+  #gallery-container.monitor-wide {
+    grid-template-columns: repeat(7, 1fr);
+    max-width: 3000px;
+  }
+}
+
+/* przycisk do przewijania ekranu do góry */
+#scrollToTopButton {
+  font-size: 0.9em;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: auto;
+  display: none; /* początkowe ukrycie przycisku */
+  padding: 10px 10px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  visibility: hidden;
+  z-index: 999; /* przycisk na wierzchu innych elementów */
+}
+
+/* wskazany przycisk do przewijania ekranu do góry */
+#scrollToTopButton:hover {
+  background-color: #0056b3;
 }

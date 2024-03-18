@@ -1,7 +1,13 @@
-import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, getAuth, signOut, onAuthStateChanged } from "firebase/auth";
-import { getDatabase, ref, set } from "firebase/database";
+import { getAnalytics } from 'firebase/analytics';
+import { initializeApp } from 'firebase/app';
+import {
+  createUserWithEmailAndPassword,
+  getAuth,
+  onAuthStateChanged,
+  signInWithEmailAndPassword,
+  signOut,
+} from 'firebase/auth';
+import { getDatabase, ref, set } from 'firebase/database';
 
 // Firebase configuration
 export const firebaseConfig = {
@@ -20,16 +26,15 @@ const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 const auth = getAuth(app);
 const database = getDatabase();
-const logoutButton = document.getElementById("logout-button");
-const registerButton = document.getElementById("register-button");
-const loginButton = document.getElementById("login-button");
+const logoutButton = document.getElementById('logout-button');
+const registerButton = document.getElementById('register-button');
+const loginButton = document.getElementById('login-button');
 const headerNaviElements = document.getElementsByClassName('header-navi');
 const logInHD = headerNaviElements[0].getElementsByTagName('a')[2];
 
 function register() {
-  const email = document.getElementById("email").value;
-  const password = document.getElementById("password").value;
-
+  const email = document.getElementById('email').value;
+  const password = document.getElementById('password').value;
 
   if (!validateEmail(email) || !validatePassword(password)) {
     alert('Invalid input!');
@@ -39,23 +44,23 @@ function register() {
   createUser(email, password);
 }
 
-function createUser(email, password, ) {
+function createUser(email, password) {
   createUserWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
+    .then(userCredential => {
       const user = userCredential.user;
       const userData = {
         email: email,
         password: password,
-        lastLogin: Date.now()
+        lastLogin: Date.now(),
       };
       return saveUserData(user.uid, userData);
     })
     .then(() => {
       alert('User Created!');
       clearFormFields();
-      closeSignInModal()
+      closeSignInModal();
     })
-    .catch((error) => {
+    .catch(error => {
       handleAuthError(error);
     });
 }
@@ -66,8 +71,8 @@ export function saveUserData(uid, userData) {
 }
 
 export function logIn() {
-  const email = document.getElementById("email").value;
-  const password = document.getElementById("password").value;
+  const email = document.getElementById('email').value;
+  const password = document.getElementById('password').value;
 
   if (!validateEmail(email) || !validatePassword(password)) {
     alert('Email or Password is incorrect!');
@@ -75,20 +80,20 @@ export function logIn() {
   }
 
   signInWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
+    .then(userCredential => {
       const user = userCredential.user;
       const databaseRef = ref(database, 'users/' + user.uid);
       const userData = {
-        lastLogin: Date.now()
+        lastLogin: Date.now(),
       };
       return set(databaseRef, userData);
     })
     .then(() => {
       alert('User Log In!');
       clearFormFields();
-      closeSignInModal()
+      closeSignInModal();
     })
-    .catch((error) => {
+    .catch(error => {
       const errorMessage = error.message;
       alert(errorMessage);
     });
@@ -106,25 +111,30 @@ function validatePassword(password) {
   const hasNumber = /\d/.test(password);
   const hasSpecialChar = /[@#$%^&+=]/.test(password);
 
-  return password.length >= MIN_PASSWORD_LENGTH && hasUpperCase && hasLowerCase && hasNumber && hasSpecialChar;
+  return (
+    password.length >= MIN_PASSWORD_LENGTH &&
+    hasUpperCase &&
+    hasLowerCase &&
+    hasNumber &&
+    hasSpecialChar
+  );
 }
 
 function logout() {
   signOut(auth)
     .then(() => {
       alert('Log Out Succesed');
-      closeSignInModal()
+      closeSignInModal();
     })
-    .catch((error) => {
+    .catch(error => {
       const errorMessage = error.message;
       alert(errorMessage);
     });
 }
 function clearFormFields() {
-  document.getElementById("email").value = "";
-  document.getElementById("password").value = "";
+  document.getElementById('email').value = '';
+  document.getElementById('password').value = '';
 }
-
 
 function handleKeyPress(event) {
   if (event.keyCode === 27) {
@@ -134,27 +144,23 @@ function handleKeyPress(event) {
 
 function closeSignInModal() {
   const signInContainer = document.querySelector('.sign-in-container');
-  signInContainer.style.display = "none";
+  signInContainer.style.display = 'none';
 }
 
-
-
-onAuthStateChanged(auth, (user) => {
-  const loginStatusElement = document.getElementById("login-status");
+onAuthStateChanged(auth, user => {
+  const loginStatusElement = document.getElementById('login-status');
   if (user) {
-    loginStatusElement.textContent = "You are log in" ;
-    logoutButton.style.display = "block";
-    loginButton.style.display = "none";
-    registerButton.style.display = "none";
-    logInHD.textContent = "Log Out"
-
-
+    loginStatusElement.textContent = 'You are log in';
+    logoutButton.style.display = 'block';
+    loginButton.style.display = 'none';
+    registerButton.style.display = 'none';
+    logInHD.textContent = 'Log Out';
   } else {
-    loginStatusElement.textContent = "You are log out";
-    logoutButton.style.display = "none";
-    loginButton.style.display = "block";
-    registerButton.style.display = "block";
-    logInHD.textContent = "Log In"
+    loginStatusElement.textContent = 'You are log out';
+    logoutButton.style.display = 'none';
+    loginButton.style.display = 'block';
+    registerButton.style.display = 'block';
+    logInHD.textContent = 'Log In';
   }
 });
 
@@ -165,12 +171,14 @@ document.addEventListener('keydown', handleKeyPress);
 
 /* dodanie zamykania modala poprzez x */
 
-document.getElementById("logout-button").addEventListener("click", logout);
-document.getElementById("login-button").addEventListener("click", logIn);
-document.getElementById("register-button").addEventListener("click", register);
+document.getElementById('logout-button').addEventListener('click', logout);
+document.getElementById('login-button').addEventListener('click', logIn);
+document.getElementById('register-button').addEventListener('click', register);
 document.addEventListener('keydown', handleKeyPress);
 
-document.querySelector('.close-modal-reg').addEventListener('click', closeSignInModal);
+document
+  .querySelector('.close-modal-reg')
+  .addEventListener('click', closeSignInModal);
 
 document.body.addEventListener('click', function (event) {
   if (event.target.classList.contains('close-modal-reg')) {

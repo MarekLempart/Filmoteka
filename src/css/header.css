@@ -1,17 +1,14 @@
-header {
-  border: 0.1px solid transparent;
+/* nagłówek strony */
+.header {
+  border: 0.01px solid transparent;
   background-color: black;
-  height: 216px;
+  background-size: 100%;
+  background-position: center;
+  height: 200px;
   display: block;
-  margin: 0;
 }
-.header-navibox {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: 32px 40px;
-  padding: 0;
-}
+
+/* kontener na logo strony */
 .header-logo {
   display: flex;
   gap: 10px;
@@ -19,72 +16,197 @@ header {
   align-items: center;
   text-decoration: none;
 }
+
+/* logo strony */
+.header svg {
+  width: 24px;
+  height: 24px;
+  margin: 0;
+}
+
+/* tytuł strony */
+.header h2 {
+  margin: 0;
+  color: #ffffff;
+  font-family: Roboto;
+  font-weight: 500;
+  font-size: 30px;
+}
+
+/* kontener z menu */
+.header-navibox {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+
+/* element menu */
 .header-navi {
   display: flex;
   gap: 39px;
   padding: 0;
   align-items: center;
 }
-header svg {
-  width: 24px;
-  height: 24px;
-  margin: 0;
-}
-header h2 {
-  margin: 0;
-  color: #ffffff;
-  font-family: Roboto;
-  font-size: 30px;
-  line-height: 35px;
-}
+
+/* odnośnik w elemencie menu */
 .header-navi a {
   color: #ffffff;
   font-size: 12px;
-  line-height: 14px;
+  font-weight: 500;
   font-family: Roboto;
   text-transform: uppercase;
   text-decoration: none;
 }
+
+/* aktywny odnośnik w elemencie menu */
+.header-navi a.active {
+  text-decoration: underline 2.5px #ff001b;
+}
+
+/* kontener na formularz z polem wyszukiwania */
 .header-search {
   display: flex;
-  justify-content: center;
-  margin-bottom: 80px;
+  margin: 0;
+  padding: 0;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
 }
+
+/* formularz z polem wyszukiwania */
 .search-form {
-  width: 394px;
+  width: 280px;
   height: 20px;
   display: flex;
   justify-content: center;
-  gap: 15px;
-  border: 1px solid var(--light-brown);
-  margin-bottom: 20px;
   align-items: center;
   border-bottom: 0.5px solid #ffffff;
   justify-content: center;
 }
-input {
+
+/* pole wyszukiwania */
+.search-form input {
+  background-color: transparent;
+  width: 380px;
+  padding-bottom: 4px;
+  border: none;
+  color: #ffffff;
+}
+
+/* tekst podpowiedzi w polu wyszukiwania */
+.search-form input::placeholder {
+  font-weight: 400;
+  color: #ffffff;
+  font-size: 14px;
+  font-family: Roboto;
+}
+
+/* aktywne pole wyszukiwania */
+.search-form input:focus-within {
   background-color: transparent;
   size: 100%;
   width: 380px;
   margin: 0;
-  border: none;
+  color: #ffffff;
+  flex-grow: 1;
+  outline: transparent;
 }
-form svg {
-  width: 12px;
-  height: 12px;
-}
-form button {
-  margin: 0;
+
+/* kontener na ikone wyszukiwania */
+.search-button {
+  width: 14px;
   border: none;
   background-color: transparent;
   padding: 0;
+  max-width: 18px;
 }
-input::placeholder {
-  color: #ffffff;
+
+/* ikona wyszukiwania */
+.search-form svg {
+  width: 12px;
+  height: 12px;
+}
+
+/* kontener na informację o braku trafień */
+.header-not-result {
   font-size: 14px;
   line-height: 16px;
-  font-family: Roboto;
-}
-.header-not-result {
   color: #ff001b;
+  padding: 0;
+  margin: 0;
+  width: 280px;
+}
+
+/* kontener na przycisku dla podstrony my library */
+.header-library {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+/* przyciski dla podstrony my library */
+.library-button {
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.33;
+  text-transform: uppercase;
+  text-align: center;
+  color: #ffffff;
+  background: transparent;
+  width: 130px;
+  height: 44px;
+  border: 1px solid #ffffff;
+  border-radius: 5;
+}
+
+/* wskazane przyciski dla podstrony my library */
+.library-button:focus,
+.library-button:hover {
+  box-shadow: 0 8px 43px 0 rgba(255, 107, 1, 0.6);
+  background: #ff6b01;
+  border: none;
+}
+
+/* bez tytułu dla telefonów */
+@media screen and (max-width: 767px) {
+  .header h2 {
+    display: none;
+  }
+}
+
+/* style dla ekranów tabletów i komputerów */
+@media screen and (min-width: 768px) {
+  .header-navi {
+    gap: 40px;
+  }
+  .search-form {
+    width: 336px;
+  }
+  .header-not-result {
+    width: 393px;
+  }
+  .header-library {
+    gap: 32px;
+  }
+  .header-search {
+    gap: 20px;
+  }
+  .library-button {
+    width: 152px;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .search-form {
+    width: 394px;
+  }
+  .header-library {
+    gap: 18px;
+  }
+  .library-button {
+    width: 147px;
+    height: 42px;
+  }
 }
